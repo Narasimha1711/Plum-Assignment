@@ -1,0 +1,24 @@
+{
+  "patient_name": null,
+  "contact": null,
+  "appointment_date": null,
+  "appointment_time": null,
+  "department": null,
+  "location": null,
+  "original_text": "",
+  "ambiguity_flags": [
+    "OCR text is empty, no data could be extracted.",
+    "low_model_confidence",
+    "missing_date",
+    "missing_time"
+  ],
+  "confidence": 0,
+  "requires_human_review": true,
+  "raw_validation_error": [
+    "\"original_text\" is not allowed to be empty"
+  ],
+  "_ocr": {
+    "words_count": 0,
+    "raw_text_snippet": ""
+  }
+}

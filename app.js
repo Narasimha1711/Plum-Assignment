@@ -1,4 +1,5 @@
 // app.js
+
 require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
@@ -38,17 +39,22 @@ app.post('/appointments', upload.single('image'), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'image file required (field name: image)' });
 
   const filePath = req.file.path;
+  console.log("Processing file:", filePath, "Original filename:", req.file.originalname); // Debug log
+
   try {
     // 1) OCR
     const ocrResult = await runOCR(filePath, process.env.OCR_LANG || 'eng');
     const ocrText = ocrResult.text || '';
+    console.log("OCR Result:", ocrResult); // Debug log
+    if (!ocrText.trim()) {
+      throw new Error("OCR failed to extract any text");
+    }
 
     // 2) Call LLM (Gemini) for structured extraction
-    // Optionally, pass base64 image for the model as well
     const imageBase64 = fs.readFileSync(filePath, { encoding: 'base64' });
     const geminiParsed = await askGeminiForAppointment(ocrText, {
       imageBase64,
-      timezone: req.body.timezone || null,
+      timezone: req.body.timezone || 'UTC',
       filename: req.file.originalname
     });
 
@@ -57,14 +63,13 @@ app.post('/appointments', upload.single('image'), async (req, res) => {
     let final = value;
     final.raw_validation_error = error ? error.details.map(d => d.message) : null;
 
-    // If the model gave confidence below threshold or flagged ambiguity, require human review.
+    // Guardrails
     if (final.confidence === undefined || final.confidence < CONF_THRESHOLD) {
       final.requires_human_review = true;
       if (!final.ambiguity_flags) final.ambiguity_flags = [];
       final.ambiguity_flags.push('low_model_confidence');
     }
 
-    // If appointment_date or appointment_time missing -> require human review and flag
     if (!final.appointment_date) {
       final.ambiguity_flags.push('missing_date');
       final.requires_human_review = true;
@@ -74,23 +79,24 @@ app.post('/appointments', upload.single('image'), async (req, res) => {
       final.requires_human_review = true;
     }
 
-    // Attach OCR metadata for audit
+    // Attach OCR metadata
     final._ocr = {
       words_count: (ocrResult.words || []).length,
       raw_text_snippet: (ocrText || '').slice(0, 200)
     };
 
-    // Save record (minimal): in production store in DB
-    const outputPath = path.join(UPLOAD_DIR, filePath.split(path.sep).pop() + '.json');
+    // Save record for audit
+    const outputPath = path.join(UPLOAD_DIR, path.basename(filePath) + '.json');
     fs.writeFileSync(outputPath, JSON.stringify(final, null, 2));
+    console.log("Saved output to:", outputPath); // Debug log
 
-    // Return structured JSON to caller
+    // Return structured JSON
     return res.json({ success: true, data: final });
   } catch (err) {
-    console.error('Processing error', err);
+    console.error('Processing error:', err);
     return res.status(500).json({ error: 'processing_failed', message: err.message });
   } finally {
-    // Optionally: keep uploaded image for audit; if not, delete file here
+    // Keep file for debugging; uncomment in production
     // fs.unlinkSync(filePath);
   }
 });

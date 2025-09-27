@@ -1,0 +1,17 @@
+{
+  "patient_name": null,
+  "contact": null,
+  "appointment_date": "2025-10-03",
+  "appointment_time": "15:00",
+  "department": "Dentistry",
+  "location": null,
+  "original_text": "Book dentist next Friday at 3pm\n",
+  "ambiguity_flags": [],
+  "confidence": 1,
+  "requires_human_review": false,
+  "raw_validation_error": null,
+  "_ocr": {
+    "words_count": 0,
+    "raw_text_snippet": "Book dentist next Friday at 3pm\n"
+  }
+}

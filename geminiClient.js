@@ -53,7 +53,7 @@ Response Schema:
 ${JSON.stringify(responseSchema, null, 2)}
 `;
 
-console.log("this", ocrText);
+// console.log("this", ocr)
 
   try {
     // Initialize the model

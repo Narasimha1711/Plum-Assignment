@@ -1,0 +1,22 @@
+{
+  "patient_name": null,
+  "contact": null,
+  "appointment_date": null,
+  "appointment_time": null,
+  "department": null,
+  "location": null,
+  "original_text": "g\n&\n\\'W\n1\n&\noe\nEF\nEE ©\ngi\nee 0»\n",
+  "ambiguity_flags": [
+    "No discernible appointment information (patient name, date, time, department, location, contact) could be extracted from the provided OCR text. The text appears to be garbled or noise.",
+    "low_model_confidence",
+    "missing_date",
+    "missing_time"
+  ],
+  "confidence": 0,
+  "requires_human_review": true,
+  "raw_validation_error": null,
+  "_ocr": {
+    "words_count": 0,
+    "raw_text_snippet": "g\n&\n\\'W\n1\n&\noe\nEF\nEE ©\ngi\nee 0»\n"
+  }
+}

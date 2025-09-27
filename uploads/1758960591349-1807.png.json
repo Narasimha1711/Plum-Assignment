@@ -1,0 +1,22 @@
+{
+  "patient_name": null,
+  "contact": null,
+  "appointment_date": null,
+  "appointment_time": null,
+  "department": null,
+  "location": null,
+  "original_text": "No text provided",
+  "ambiguity_flags": [
+    "No OCR text was provided for extraction.",
+    "low_model_confidence",
+    "missing_date",
+    "missing_time"
+  ],
+  "confidence": 0,
+  "requires_human_review": true,
+  "raw_validation_error": null,
+  "_ocr": {
+    "words_count": 0,
+    "raw_text_snippet": ""
+  }
+}

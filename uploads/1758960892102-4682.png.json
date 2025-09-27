@@ -1,0 +1,17 @@
+{
+  "patient_name": "Narasimha",
+  "contact": null,
+  "appointment_date": "2025-10-04",
+  "appointment_time": "17:00",
+  "department": "Dentistry",
+  "location": null,
+  "original_text": "This is Narasimha, book a dentist next Saturday at 5PM",
+  "ambiguity_flags": [],
+  "confidence": 0.95,
+  "requires_human_review": false,
+  "raw_validation_error": null,
+  "_ocr": {
+    "words_count": 0,
+    "raw_text_snippet": "This is Narasimha, book a dentist next Saturday at 5PM\n"
+  }
+}

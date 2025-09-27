@@ -1,39 +1,25 @@
 // ocr.js
-const Tesseract = require("tesseract.js");
-const fs = require("fs");
-const path = require("path");
+
+const { createWorker } = require('tesseract.js');
 
 /**
- * Run OCR on an uploaded image file
- * @param {string} filePath - local path of uploaded file
- * @returns {Promise<string>} extracted text
+ * Run OCR on an image file
+ * @param {string} filePath - Path to the image
+ * @param {string} lang - Language code (e.g., 'eng')
+ * @returns {Promise<Object>} - { text, words }
  */
-async function runOCR(filePath) {
+async function runOCR(filePath, lang = 'eng') {
   try {
-    if (!filePath) {
-      throw new Error("No file path provided for OCR");
-    }
-
-    console.log("🔍 Running OCR on:", filePath);
-
-    // Run OCR using tesseract.js
-    const { data: { text } } = await Tesseract.recognize(
-      filePath,
-      "eng", // Language: English
-      {
-        logger: (m) => {
-          if (m.status === "recognizing text") {
-            console.log(`📖 Progress: ${Math.round(m.progress * 100)}%`);
-          }
-        }
-      }
-    );
-
-    console.log("✅ OCR extraction done.");
-    return text.trim();
+    const worker = await createWorker(lang);
+    const { data } = await worker.recognize(filePath);
+    await worker.terminate();
+    return {
+      text: data.text || '',
+      words: data.words || [],
+    };
   } catch (err) {
-    console.error("❌ OCR Error:", err);
-    throw err;
+    console.error("OCR Error:", err);
+    throw new Error(`OCR processing failed: ${err.message}`);
   }
 }
 
