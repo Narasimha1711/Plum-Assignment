@@ -1,0 +1,17 @@
+{
+  "patient_name": "John Doe",
+  "contact": "555-123-4567",
+  "appointment_date": "2025-09-28",
+  "appointment_time": "10:30",
+  "department": "Dentistry",
+  "location": "City Central Clinic, 123 Main St.",
+  "original_text": "APPOINTMENT REMINDER\nPatient: John Doe\nContact: 555-123-4567\nDate: Tomorrow\nTime: 10:30 AM\nDepartment: Dentist\nLocation: City Central Clinic, 123 Main St.",
+  "ambiguity_flags": [],
+  "confidence": 0.98,
+  "requires_human_review": false,
+  "raw_validation_error": null,
+  "_ocr": {
+    "words_count": 0,
+    "raw_text_snippet": ""
+  }
+}
