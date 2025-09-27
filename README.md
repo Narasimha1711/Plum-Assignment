@@ -1,4 +1,4 @@
-# AI-Powered Appointment Scheduler Assistant
+# AI-Powered Appointment Scheduler Assistant 
 
 A **Node.js backend service** that processes appointment requests from images using OCR and Google's Gemini AI to extract structured scheduling data. It converts natural language or document-based appointment details into JSON format with robust guardrails for ambiguity handling.
 
@@ -10,12 +10,8 @@ A **Node.js backend service** that processes appointment requests from images us
 - [Architecture](#architecture)  
 - [Tech Stack](#tech-stack)  
 - [Setup Instructions](#setup-instructions)  
-- [Project Structure](#project-structure)  
 - [API Usage](#api-usage)  
-- [Debugging Tips](#debugging-tips)  
-- [Production Considerations](#production-considerations)  
-- [Troubleshooting](#troubleshooting)  
-- [License](#license)  
+
 
 ---
 
@@ -96,7 +92,7 @@ The backend follows a modular pipeline:
 Clone the project
 
 ```bash
-  git clone https://github.com/<your-username>/appointment-scheduler.git
+  git clone https://github.com/Narasimha1711/Plum-Assignment.git
 
 ```
 
@@ -125,6 +121,11 @@ Start the server
 
 ```bash
   node server.js
+```
+
+Acess Backend 
+```bash
+    https://marmoreal-tuberous-sadye.ngrok-free.dev/appointments
 ```
 
 
