@@ -74,3 +74,58 @@ The backend follows a modular pipeline:
 
   # Verify installation
   tesseract -v
+
+  ---
+
+## API Reference
+
+#### Book Appointment
+
+```http
+  POST /appointments
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `image` | `string` | **Required**. Your API key |
+
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/<your-username>/appointment-scheduler.git
+
+```
+
+Go to the project directory
+
+```bash
+  cd appointment-scheduler
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Set Up Environment Variables
+```bash
+    GEMINI_API_KEY=your_actual_key
+    PORT=3000
+    UPLOAD_DIR=./Uploads
+    CONFIDENCE_THRESHOLD=0.75
+    OCR_LANG=eng
+```
+
+Start the server
+
+```bash
+  node server.js
+```
+
+
+
